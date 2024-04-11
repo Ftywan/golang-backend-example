@@ -1,6 +1,6 @@
+[![CI](https://github.com/Ftywan/golang-backend-example/actions/workflows/go.yml/badge.svg)](https://github.com/Ftywan/golang-backend-example/actions/workflows/go.yml)
 # Golang Backend Example
 Simple Rest API using Golang.
-[![CI](https://github.com/Ftywan/golang-backend-example/actions/workflows/go.yml/badge.svg)](https://github.com/Ftywan/golang-backend-example/actions/workflows/go.yml)
 
 ## Requirement
 ### Docker Environment
