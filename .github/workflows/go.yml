@@ -5,50 +5,40 @@ name: Go
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ master ]
   pull_request:
-    branches: [ "master" ]
-  schedule:
-  - cron: "0 2 * * 1-5"
-  workflow_dispatch:
-  
+    branches: [ master ]
+    
 jobs:
-
-  build:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    
+    - name: Checkout
+      uses: actions/checkout@master
 
-    # - name: Set up Go
-    #   uses: actions/setup-go@v4
-    #   with:
-    #     go-version: '1.20'
-        
-    # - name: Test
-    #   run: go test --race -v ./...
-      
     - name: Authenticate
       uses: 'google-github-actions/auth@v2'
       with:
         credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-    
+
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
       with:
         project_id: ${{ secrets.GCP_PROJECT }}
         service_account_key: ${{ secrets.GCP_CREDENTIALS }}
         export_default_credentials: true
-  
-      # Configure Docker with Credentials
+
+    # Configure Docker with Credentials
     - name: Configure Docker
       run: |
-        gcloud auth configure-docker us-central1-docker.pkg.dev,asia-northeast1-docker.pkg.dev
-  
+        gcloud auth configure-docker
+
     - name: Build container image
       run: |
-        docker build -t ${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest .
-  
+        docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest .
+
     - name: Push to Artifact Registry
       run: |
-        docker push ${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest
-  
+        docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest
