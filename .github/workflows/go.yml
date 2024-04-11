@@ -27,7 +27,28 @@ jobs:
     - name: Test
       run: go test --race -v ./...
       
-    - name: Build
+    - name: Authenticate
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+    
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ secrets.GCP_PROJECT }}
+        service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+        export_default_credentials: true
+  
+      # Configure Docker with Credentials
+    - name: Configure Docker
       run: |
-        env GOOS=linux GOARCH=arm64 go build -o backend-linux-arm64 main.go
-        env GOOS=linux GOARCH=amd64 go build -o backend-linux-amd64 main.go
+        gcloud auth configure-docker
+  
+    - name: Build container image
+      run: |
+        docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest .
+  
+    - name: Push to Artifact Registry
+      run: |
+        docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest
+  
