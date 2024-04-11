@@ -46,9 +46,9 @@ jobs:
   
     - name: Build container image
       run: |
-        docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest .
+        docker build -t ${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest .
   
     - name: Push to Artifact Registry
       run: |
-        docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest
+        docker push ${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest
   
