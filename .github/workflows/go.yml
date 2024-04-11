@@ -33,7 +33,7 @@ jobs:
     # Configure Docker with Credentials
     - name: Configure Docker
       run: |
-        gcloud auth configure-docker us-docker.pkg.dev
+        gcloud auth configure-docker
 
     - name: Build container image
       run: |
