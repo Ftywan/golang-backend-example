@@ -1,5 +1,8 @@
 [![CI](https://github.com/Ftywan/golang-backend-example/actions/workflows/go.yml/badge.svg)](https://github.com/Ftywan/golang-backend-example/actions/workflows/go.yml)
 # Golang Backend Example
+
+Hey I'm making some changes here!
+
 The base project is a simple Rest API collection using Golang. It can serve as an extendable backend template, with connections to PostgreSQL and Redis as the caching layer.
 
 In addition to the project, a CI pipeline is configured using Github Actions. Here is the sequence of operations the pipeline performs:
