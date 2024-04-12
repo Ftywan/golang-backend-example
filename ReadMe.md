@@ -11,8 +11,10 @@ In addition to the project, a CI pipeline is configured using Github action. Her
 - compile the service and build a docker image
 - upload the newly built image to the cloud artifactory for further deployment.
 
-The pipeline will be triggered anytime when there is a new commit submitted or a PR is made to the main branch. At the end of the pipeline, a docker image containing the latest executable file is uploaded to the artifactory. For deployment, ope engineer can choose the corresponding version to deploy new features, or to rollback to a previous stable version. 
+The pipeline will be triggered anytime when there is a new commit submitted or a PR is made to the main branch. It can also be triggered manually if needed. At the end of the pipeline, a docker image containing the latest executable file is uploaded to the artifactory. For deployment, ope engineer can choose the corresponding version to deploy new features, or to rollback to a previous stable version. 
 
+> Why the deployment process is not included
+To run as expected, the backend service also needs other running database/caching services. A cloud deployment of postgreSQL to gcp was atttempted, and the connection to which requires inevitable certificates setup. Given the complexity of setting up a secret management system to a production environment, the backend sample is only packaged and uploaded to artifactory. No further deployments are followed up due to the complexity to set up a databsae connection/secret management. Even the docker image is instantiated into a container, the process will still crash and stop the container.
 
 The following sections are from the original readme contents with set-up guide:
 ## Requirement
