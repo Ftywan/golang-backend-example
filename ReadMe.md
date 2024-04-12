@@ -1,7 +1,19 @@
 [![CI](https://github.com/Ftywan/golang-backend-example/actions/workflows/go.yml/badge.svg)](https://github.com/Ftywan/golang-backend-example/actions/workflows/go.yml)
 # Golang Backend Example
-Simple Rest API using Golang.
+The base project is a simeple Rest API collection using Golang. It can serve as an extendable backend template, with connection to postgresql and redis as the caching layer. 
 
+In addition to the project, a CI pipeline is configured using Github action. Here is the sequence of operations the pipeline performs:
+- provision a ubuntu enviroment to execute the pipeline
+- download and install the specified go language pack and required packages
+- run testing cases defined in the repo
+- authenticate and set up google cloud connection
+- configure docker and gcp artifacotry
+- compile the service and build a docker image
+- upload the newly built image to the cloud artifactory for further deployment.
+
+The pipeline will be triggered anytime when there is a new commit submitted or a PR is made to the main branch. At the end of the pipeline, a docker image containing the latest executable file is uploaded to the artifactory. For deployment, ope engineer can choose the corresponding version to deploy new features, or to rollback to a previous stable version. 
+
+original readme contents with set-up guide:
 ## Requirement
 ### Docker Environment
 - Docker 
