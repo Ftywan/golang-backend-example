@@ -13,7 +13,8 @@ In addition to the project, a CI pipeline is configured using Github action. Her
 
 The pipeline will be triggered anytime when there is a new commit submitted or a PR is made to the main branch. At the end of the pipeline, a docker image containing the latest executable file is uploaded to the artifactory. For deployment, ope engineer can choose the corresponding version to deploy new features, or to rollback to a previous stable version. 
 
-original readme contents with set-up guide:
+
+The following sections are from the original readme contents with set-up guide:
 ## Requirement
 ### Docker Environment
 - Docker 
